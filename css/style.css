@@ -1,0 +1,15 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+#menu{
+    background-color: rgb(39, 122, 66, 0.7);
+}
+nav#menu > div > ul > li.slove:hover{
+    border: solid 2px #405948;
+    border-top: 0px;
+    border-right: 0px;
+    border-left: 0px;
+}
+label.error{
+    color: red;
+}
