@@ -118,3 +118,46 @@ new Vue({
        }
     }
 })
+
+new Vue({
+    el:"#edit-giang-vien",
+    data:{
+        items:[
+            {
+                id:"username_edit",
+                type:"text",
+                text:"Tên đăng nhập",
+                name:"username",
+                placeholder:"Nhập tên đăng nhập"
+            },
+            {
+                id:"password_edit",
+                type:"password",
+                text:"Mật khẩu (Để trống nếu không đổi mật khẩu)",
+                name:"password",
+                placeholder:"Nhập mật khẩu"
+            },
+            {
+                id:"re_password_edit",
+                type:"password",
+                text:"Nhập lại mật khẩu (Để trống nếu không đổi mật khẩu)",
+                name:"re_password",
+                placeholder:"Nhập lại mật khẩu"
+            },
+            {
+                id:"full_name_edit",
+                type:"text",
+                text:"Họ và tên",
+                name:"full_name",
+                placeholder:"Nhập họ và tên"
+            },
+            {
+                id:"email_edit",
+                type:"email",
+                text:"Email",
+                name:"email",
+                placeholder:"Nhập Email"
+            }
+        ]
+    }
+})

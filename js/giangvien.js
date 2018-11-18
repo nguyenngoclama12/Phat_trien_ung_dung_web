@@ -46,4 +46,46 @@ $().ready(() =>{
             }
         }
     })
+    $("#edit-giang-vien").validate({
+        rules:{
+        username:{
+          required:true,
+          minlength:4,
+          maxlength:30
+        },
+        password:{
+        },
+        re_password:{
+          equalTo:'#password_edit'
+        },
+        full_name:{
+          required:true,
+        },
+        email:{
+          required:true,
+          email:true
+        }
+      },
+      messages:{
+        username:{
+          required:"Bạn chưa nhập tài khoản",
+          minlength:"Tài khoản quá ngắn",
+          maxlength:"Tài khoản quá dài"
+        },
+        password:{
+          minlength:"Mật khẩu phải có ít nhất 8 kí tự"
+        },
+        re_password:{
+
+          equalTo:"Mật khẩu không khớp"
+        },
+        full_name:{
+          required:"Bạn chưa nhập họ và tên",
+        },
+        email:{
+          required:"Bạn chưa nhập email",
+          email:"Email chưa đúng định dạng"
+        }
+      }
+    })
 })
