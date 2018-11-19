@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <script type="text/x-template" id="form-bootstrap">
+        <div class="form-group">
+            <label :for="for_id">{{text_for}}</label>
+            <input :type="type" :name="name" class="form-control" :id="for_id" :placeholder="placeholder" required>
+        </div>
+    </script>
+        <nav id="menu" class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="#">Kuri</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item" v-for="item in items" :class="isActive(item)" :key="items.id">
+                        <a class="nav-link" href="#">{{item.name}}</a>
+                    </li>   
+                </ul>
+            </div>
+        </nav>
+    <div class="container" id="header">
+        <br>
+        <div class="row">
+            <div class="col-md-5">
+                <h1>Danh sách giảng viên</h1>
+            </div>
+            <div class="col-md-5">
+                <button-bootstrap type1="" color="danger" data="Thêm giảng viên" data-toggle="modal" data-target="#insertModal" ></button-bootstrap>
+            </div>
+            <div class="col-md-auto">
+                <button class="btn btn-outline-success" @click="haha">Nhập từ excel</button>
+            </div>    
+        </div>
+        <div v-if="oke" class="row">
+            <div class="col-md-7">&nbsp;</div>
+            <div class="col-md-3">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">Chọn tệp</label>
+                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-2">
+                <div>&nbsp;</div>
+                <button-bootstrap type1="" color="success" data="chapnhan"></button-bootstrap>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="insertModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Thêm tài khoản giảng viên</h4>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form id="formInsert" class="form-group" action="http://localhost:8000/admin/giang-vien" method="post" >
+                        <form-bootstrap v-for="item in items" :key="items.id" 
+                                        :for_id="item.id" 
+                                        :text_for="item.text"
+                                        :type="item.type"
+                                        :name="item.name"
+                                        :placeholder="item.placeholder">
+                        </form-bootstrap>
+                        <button-bootstrap type="submit" type1="" data="Thêm" color="success"></button-bootstrap>
+                        <button-bootstrap type="button" type1="outline" data="Thoát" color="danger" data-dismiss="modal"></button-bootstrap> 
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">STT</th>
+                    <th scope="col">Tên đăng nhập</th>
+                    <th scope="col">Họ và tên</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>thanhld</td>
+                    <td>Lê Đình Thanh</td>
+                    <td>thanhld@vnu.edu.vn</td>
+                    <td>
+                        <div class="btn-group" account_id=1 account_info="{&quot;id&quot;:1,&quot;username&quot;:&quot;thanhld&quot;,&quot;password&quot;:&quot;$2y$10$6LLbxjY5UVg3\/q2zMp2ySOsRIagRiPtEY1dN4IAQgSbOtjz1m7qwm&quot;,&quot;full_name&quot;:&quot;L\u00ea \u0110\u00ecnh Thanh&quot;,&quot;vnu_mail&quot;:&quot;thanhld@vnu.edu.vn&quot;,&quot;created_at&quot;:&quot;2018-11-09 11:39:30&quot;,&quot;updated_at&quot;:&quot;2018-11-09 11:39:30&quot;}">
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editModal" >
+                                <i class="fa fa-edit"></i>
+                            </button>
+                            <button type="submit" class="btn btn-success" onclick = "showTeacherInfo(this);"> <i class="fa fa-eye"></i> </button>
+                            <form  method="post" action="http://localhost:8000/admin/giang-vien/1" >
+                                <input type="hidden" name="_token" value="2jkqFnLfbw6LjWoY65nvnPq8pCEutNCCxgSmt6Zl">
+                                <input type="hidden" name="_method" value="delete">
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa mục này ?')" > <i class="fa fa-trash"></i> </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td>
+                        <div class="btn-group" account_id=1 account_info="{&quot;id&quot;:1,&quot;username&quot;:&quot;thanhld&quot;,&quot;password&quot;:&quot;$2y$10$6LLbxjY5UVg3\/q2zMp2ySOsRIagRiPtEY1dN4IAQgSbOtjz1m7qwm&quot;,&quot;full_name&quot;:&quot;L\u00ea \u0110\u00ecnh Thanh&quot;,&quot;vnu_mail&quot;:&quot;thanhld@vnu.edu.vn&quot;,&quot;created_at&quot;:&quot;2018-11-09 11:39:30&quot;,&quot;updated_at&quot;:&quot;2018-11-09 11:39:30&quot;}">
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editModal">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                            <button type="submit" class="btn btn-success" onclick = "showTeacherInfo(this);"> <i class="fa fa-eye"></i> </button>
+                            <form  method="post" action="http://localhost:8000/admin/giang-vien/1" >
+                                <input type="hidden" name="_token" value="2jkqFnLfbw6LjWoY65nvnPq8pCEutNCCxgSmt6Zl">              <input type="hidden" name="_method" value="delete">
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa mục này ?')" > <i class="fa fa-trash"></i> </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                    <td>
+                        <div class="btn-group" account_id=1 account_info="{&quot;id&quot;:1,&quot;username&quot;:&quot;thanhld&quot;,&quot;password&quot;:&quot;$2y$10$6LLbxjY5UVg3\/q2zMp2ySOsRIagRiPtEY1dN4IAQgSbOtjz1m7qwm&quot;,&quot;full_name&quot;:&quot;L\u00ea \u0110\u00ecnh Thanh&quot;,&quot;vnu_mail&quot;:&quot;thanhld@vnu.edu.vn&quot;,&quot;created_at&quot;:&quot;2018-11-09 11:39:30&quot;,&quot;updated_at&quot;:&quot;2018-11-09 11:39:30&quot;}">
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editModal" >
+                                <i class="fa fa-edit"></i>
+                            </button>
+                            <button type="submit" class="btn btn-success" onclick = "showTeacherInfo(this);"> <i class="fa fa-eye"></i> </button>
+                            <form  method="post" action="http://localhost:8000/admin/giang-vien/1" >
+                                <input type="hidden" name="_token" value="2jkqFnLfbw6LjWoY65nvnPq8pCEutNCCxgSmt6Zl">              <input type="hidden" name="_method" value="delete">
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa mục này ?')" > <i class="fa fa-trash"></i> </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- edit tai khoan giang vien -->
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editGV" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="editGV">Sửa tài khoản giảng viên</h4>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form id="edit-giang-vien" class="form-group" action="http://localhost:8000/admin/giang-vien" method="post" >
+                            <form-bootstrap v-for="item in items" :key="items.id" 
+                                            :for_id="item.id" 
+                                            :text_for="item.text"
+                                            :type="item.type"
+                                            :name="item.name"
+                                            :placeholder="item.placeholder">
+                            </form-bootstrap>
+                            <button-bootstrap type="submit" type1="" data="Sửa" color="success"></button-bootstrap>
+                            <button-bootstrap type="button" type1="outline" data="Thoát" color="danger" data-dismiss="modal"></button-bootstrap> 
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </body>
+    <script src="../bootstrap/js/jquery.min.js"></script>
+    <script src="../bootstrap/js/jquery.validate.min.js"></script>
+    <script src="../bootstrap/js/popper.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../Vuejs/vue.js"></script>
+    <script src="../js/test.js"></script>
+    <script src="../js/giangvien.js"></script>
+</html>
